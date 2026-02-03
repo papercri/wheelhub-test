@@ -13,7 +13,24 @@ const loadUsers = async () => {
   users.value = await res.json()
   loading.value = false
 }
+const selectedUser = ref<User | null>(null)
+const showModal = ref(false)
+const openDetail = (user: User) => {
+  selectedUser.value = user
+  showModal.value = true
+}
 
+const closeModal = () => {
+  showModal.value = false
+}
+
+const deleteUser = async (id: number) => {
+  await fetch(`http://localhost:3000/users/${id}`, {
+    method: 'DELETE'
+  })
+
+  users.value = users.value.filter(u => u.id !== id)
+}
 onMounted(loadUsers)
 console.log("loading:", loading.value) 
 const filteredUsers = computed(() => {
@@ -73,36 +90,61 @@ const filteredUsers = computed(() => {
         Loading...
       </div>
 
-      <table v-else class="w-full border-collapse">
-        <thead>
-          <tr class="text-left border-b border-b-emerald-500">
-            <th class="py-2">ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
+      <table class="w-full">
+        <tr
+          v-for="u in filteredUsers"
+          :key="u.id"
+          class="border-b hover:bg-gray-50"
+        >
+          <td class="py-2">{{ u.id }}</td>
+          <td>{{ u.name }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.status }}</td>
 
-        <tbody>
-          <tr
-            v-for="u in filteredUsers"
-            :key="u.id"
-            class="border-b hover:bg-gray-50  border-b-emerald-300"
-          >
-            <td class="py-2">{{ u.id }}</td>
-            <td>{{ u.name }}</td>
-            <td>{{ u.email }}</td>
-            <td>{{ u.status }}</td>
-          </tr>
+          <td class="flex gap-3 justify-end py-2">
 
-          <tr v-if="filteredUsers.length === 0">
-            <td colspan="4" class="py-4 text-center text-gray-400">
-              No hay ningún usuario con este criterio de búsqueda
-            </td>
-          </tr>
-        </tbody>
+            <button
+              @click="openDetail(u)"
+              class="text-sm underline"
+            >
+              <font-awesome-icon icon="eye" />
+            </button>
+
+            <button
+              @click="deleteUser(u.id)"
+              class="text-red-500 font-bold"
+            >
+              <font-awesome-icon icon="xmark" />
+            </button>
+
+          </td>
+        </tr>
       </table>
+
 
     </div>
   </div>
+
+
+  <div
+  v-if="showModal && selectedUser"
+  class="fixed inset-0 bg-black/40 flex items-center justify-center"
+>
+  <div class="bg-white p-6 rounded shadow w-80 space-y-3">
+    <h2 class="text-xl font-bold">Detalle usuario</h2>
+
+    <p><b>ID:</b> {{ selectedUser.id }}</p>
+    <p><b>Nombre:</b> {{ selectedUser.name }}</p>
+    <p><b>Email:</b> {{ selectedUser.email }}</p>
+    <p><b>Estado:</b> {{ selectedUser.status }}</p>
+
+    <button
+      @click="closeModal"
+      class="mt-4 bg-black text-white px-4 py-2 rounded w-full"
+    >
+      Cerrar
+    </button>
+  </div>
+</div>
+
 </template>

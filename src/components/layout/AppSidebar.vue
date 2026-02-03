@@ -41,7 +41,7 @@
         
         <li>
           <SidebarItem 
-            label="Demo" 
+            label="Usuarios" 
             :active="true"
           />
         </li>
