@@ -23,21 +23,20 @@ npm install
 
 3. **Ejecutar el proyecto en modo desarrollo**
 
-Opción A: Con servidor de desarrollo local
+
 ```bash
 
 # Terminal 1: Ejecutar el servidor JSON
+
 cd src/api
 npx json-server --watch users.json --port 3000
 
 # Terminal 2: Ejecutar el frontend
+
 npm run dev
 ```
 
-Opción B: Usar el script de desarrollo completo (si está configurado)
-```bash
-npm run dev
-```
+
 
 4. **Acceder a la aplicación**
 - Frontend: http://localhost:5173
@@ -62,15 +61,6 @@ docker-compose up --build
 docker-compose down
 ```
 
-## Scripts Disponibles
-
-```bash
-npm run dev          # Ejecutar en modo desarrollo
-npm run build        # Construir para producción
-npm run preview      # Previsualizar build de producción
-npm run type-check   # Verificar tipos TypeScript
-```
-
 ## Estructura del Proyecto
 
 ```
@@ -92,7 +82,7 @@ wheelhub-test/
 └── package.json
 ```
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 - **Vue 3** - Framework JavaScript progresivo
 - **TypeScript** - Superset de JavaScript con tipos
@@ -100,10 +90,4 @@ wheelhub-test/
 - **Tailwind CSS** - Framework CSS utility-first
 - **JSON Server** - API REST falsa para desarrollo
 - **Docker** - Contenedorización de la aplicación
-
-## 📝 Notas
-
-- El archivo `users.json` contiene los datos de prueba
-- La aplicación usa Tailwind CSS para los estilos
-- TypeScript está configurado con modo estricto
 

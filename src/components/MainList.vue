@@ -4,11 +4,9 @@ import type { User } from '../types/types.ts'
 
 const users = ref<User[]>([])
 const loading = ref(false)
-
 const nameFilter = ref('')
 const emailFilter = ref('')
 const statusFilter = ref<'all' | 'activo' | 'inactivo'>('all')
-
 const loadUsers = async () => {
   loading.value = true
   const res = await fetch('http://localhost:3000/users')
@@ -17,7 +15,7 @@ const loadUsers = async () => {
 }
 
 onMounted(loadUsers)
-
+console.log("loading:", loading.value) 
 const filteredUsers = computed(() => {
   return users.value.filter(u => {
     const byName =
@@ -37,9 +35,15 @@ const filteredUsers = computed(() => {
 <template>
   <div class="min-h-screen bg-gray-100">
     <div class="max-w-3xl mx-2 bg-white  p-6 space-y-6">
-
-      <h1 class="text-2xl font-bold">Usuarios</h1>
-
+      <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">Usuarios <span class="text-gray-600 text-xs font-light">({{ filteredUsers.length }})</span></h1>
+          <router-link
+            to="/usuarios/nuevo"
+            class="bg-black text-white px-4 py-2 rounded hover:opacity-80"
+          >
+            Añadir usuario
+          </router-link>
+      </div>
       <!-- Filters -->
       <div class="grid md:grid-cols-3 gap-4">
         <input
@@ -73,7 +77,7 @@ const filteredUsers = computed(() => {
         <thead>
           <tr class="text-left border-b border-b-emerald-500">
             <th class="py-2">ID</th>
-            <th>Nome</th>
+            <th>Nombre</th>
             <th>Email</th>
             <th>Estado</th>
           </tr>
