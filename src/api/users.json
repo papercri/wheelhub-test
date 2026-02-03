@@ -5,6 +5,31 @@
     { "id": 3, "name": "Maria Garcia", "email": "maria@mail.com", "status": "activo" },
     { "id": 4, "name": "Carlos Diaz", "email": "carlos@mail.com", "status": "inactivo" },
     { "id": 5, "name": "Lucia Torres", "email": "lucia@mail.com", "status": "activo" },
-    { "id": 6, "name": "Pedro Ruiz", "email": "pedro@mail.com", "status": "inactivo" }
+    { "id": 6, "name": "Pedro Ruiz", "email": "pedro@mail.com", "status": "inactivo" },
+
+    { "id": 7, "name": "Laura Moreno", "email": "laura@mail.com", "status": "activo" },
+    { "id": 8, "name": "Miguel Santos", "email": "miguel@mail.com", "status": "inactivo" },
+    { "id": 9, "name": "Elena Romero", "email": "elena@mail.com", "status": "activo" },
+    { "id": 10, "name": "David Navarro", "email": "david@mail.com", "status": "activo" },
+    { "id": 11, "name": "Paula Vega", "email": "paula@mail.com", "status": "inactivo" },
+    { "id": 12, "name": "Jorge Molina", "email": "jorge@mail.com", "status": "activo" },
+    { "id": 13, "name": "Sara Castillo", "email": "sara@mail.com", "status": "activo" },
+    { "id": 14, "name": "Alberto Cruz", "email": "alberto@mail.com", "status": "inactivo" },
+    { "id": 15, "name": "Noelia Flores", "email": "noelia@mail.com", "status": "activo" },
+    { "id": 16, "name": "Ruben Ortega", "email": "ruben@mail.com", "status": "inactivo" },
+    { "id": 17, "name": "Irene Ramos", "email": "irene@mail.com", "status": "activo" },
+    { "id": 18, "name": "Victor Herrera", "email": "victor@mail.com", "status": "activo" },
+    { "id": 19, "name": "Clara Medina", "email": "clara@mail.com", "status": "inactivo" },
+    { "id": 20, "name": "Sergio Leon", "email": "sergio@mail.com", "status": "activo" },
+    { "id": 21, "name": "Patricia Peña", "email": "patricia@mail.com", "status": "activo" },
+    { "id": 22, "name": "Oscar Campos", "email": "oscar@mail.com", "status": "inactivo" },
+    { "id": 23, "name": "Marta Gil", "email": "marta@mail.com", "status": "activo" },
+    { "id": 24, "name": "Ivan Soto", "email": "ivan@mail.com", "status": "inactivo" },
+    { "id": 25, "name": "Andrea Bravo", "email": "andrea@mail.com", "status": "activo" },
+    { "id": 26, "name": "Hector Prieto", "email": "hector@mail.com", "status": "activo" },
+    { "id": 27, "name": "Silvia Marquez", "email": "silvia@mail.com", "status": "inactivo" },
+    { "id": 28, "name": "Diego Fuentes", "email": "diego@mail.com", "status": "activo" },
+    { "id": 29, "name": "Natalia Reyes", "email": "natalia@mail.com", "status": "activo" },
+    { "id": 30, "name": "Pablo Nuñez", "email": "pablo@mail.com", "status": "inactivo" }
   ]
 }
