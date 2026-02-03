@@ -1,0 +1,10 @@
+{
+  "users": [
+    { "id": 1, "name": "Ana Lopez", "email": "ana@mail.com", "status": "activo" },
+    { "id": 2, "name": "Juan Perez", "email": "juan@mail.com", "status": "inactivo" },
+    { "id": 3, "name": "Maria Garcia", "email": "maria@mail.com", "status": "activo" },
+    { "id": 4, "name": "Carlos Diaz", "email": "carlos@mail.com", "status": "inactivo" },
+    { "id": 5, "name": "Lucia Torres", "email": "lucia@mail.com", "status": "activo" },
+    { "id": 6, "name": "Pedro Ruiz", "email": "pedro@mail.com", "status": "inactivo" }
+  ]
+}
