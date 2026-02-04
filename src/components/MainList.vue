@@ -13,6 +13,26 @@ const loadUsers = async () => {
   users.value = await res.json()
   loading.value = false
 }
+
+// Pagination
+const currentPage = ref(1)
+const perPage = 10
+
+const totalPages = computed(() =>
+  Math.ceil(filteredUsers.value.length / perPage)
+)
+
+const paginatedUsers = computed(() => {
+  const start = (currentPage.value - 1) * perPage
+  const end = start + perPage
+  return filteredUsers.value.slice(start, end)
+})
+
+function goToPage(p: number) {
+  currentPage.value = p
+}
+
+
 const selectedUser = ref<User | null>(null)
 const showModal = ref(false)
 const openDetail = (user: User) => {
@@ -50,8 +70,9 @@ const filteredUsers = computed(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <div class="max-w-3xl mx-2 bg-white  p-6 space-y-6">
+  <div class="h-[calc(100vh-64px)] flex flex-col">
+    <!-- head -->
+    <div class="max-w-3xl mx-2 bg-white  p-6 space-y-6 flex-1 flex flex-col">
       <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-bold">Usuarios <span class="text-gray-600 text-xs font-light">({{ filteredUsers.length }})</span></h1>
           <router-link
@@ -85,7 +106,7 @@ const filteredUsers = computed(() => {
         </select>
       </div>
 
-      <!-- Table -->
+    <!-- Table -->
       <div v-if="loading" class="text-center py-6">
         Loading...
       </div>
@@ -104,7 +125,7 @@ const filteredUsers = computed(() => {
 
         <tbody class="alt-bg-colors">
           <tr
-            v-for="u in filteredUsers"
+            v-for="u in paginatedUsers"
             :key="u.id"
           >
             <td class="py-2 px-2">{{ u.id }}</td>
@@ -136,6 +157,26 @@ const filteredUsers = computed(() => {
           </tr>
         </tbody>
       </table>
+
+    <!-- Pagination -->
+      <div
+        v-if="totalPages > 1"
+        class="flex justify-center gap-2 mt-auto pt-6"
+      >
+        <button
+          v-for="p in totalPages"
+          :key="p"
+          @click="goToPage(p)"
+          class="w-9 h-9 rounded-full  flex items-center justify-center text-sm"
+          :class="p === currentPage
+            ? 'btn-primary'
+            : 'btn-secondary'"
+        >
+          {{ p }}
+        </button>
+      </div>
+
+
     </div>
   </div>
 
