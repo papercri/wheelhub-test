@@ -29,7 +29,7 @@ npm install
 # Terminal 1: Ejecutar el servidor JSON
 
 cd src/api
-npx json-server --watch users.json --port 3000
+npx json-server --watch db.json --port 3000
 
 # Terminal 2: Ejecutar el frontend
 
