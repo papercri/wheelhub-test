@@ -1,112 +1,23 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import type { User } from '../types/types'
+import { useUsers } from '../composables/useUsers'
+import { useUserFilters } from '../composables/useUserFilters'
+import { usePagination } from '../composables/usePagination'
 
 const router = useRouter()
 const route = useRoute()
 
-/*  DATA  */
+const { users, loading, loadUsers } = useUsers()
+const { nameFilter, emailFilter, statusFilter, currentPage, filteredUsers } = useUserFilters(users)
+const { totalPages, paginatedItems: paginatedUsers, goToPage } = usePagination(filteredUsers, currentPage)
 
-const users = ref<User[]>([])
-const loading = ref(false)
-
-const nameFilter = ref('')
-const emailFilter = ref('')
-const statusFilter = ref<'all' | 'activo' | 'inactivo'>('all')
-
-const currentPage = ref(1)
-const perPage = 10
-
-/* FETCH  */
-
-const loadUsers = async () => {
-  loading.value = true
-  const res = await fetch('http://localhost:3000/users')
-  users.value = await res.json()
-  loading.value = false
-}
-
-/*  FILTERS  */
-
-const filteredUsers = computed(() => {
-  return users.value.filter(u => {
-    const byName = u.name.toLowerCase().includes(nameFilter.value.toLowerCase())
-    const byEmail = u.email.toLowerCase().includes(emailFilter.value.toLowerCase())
-    const byStatus =
-      statusFilter.value === 'all' || u.status === statusFilter.value
-
-    return byName && byEmail && byStatus
-  })
-})
-
-/*  PAGINATION  */
-
-const totalPages = computed(() =>
-  Math.max(1, Math.ceil(filteredUsers.value.length / perPage))
-)
-
-const paginatedUsers = computed(() => {
-  const page = Math.min(currentPage.value, totalPages.value)
-  const start = (page - 1) * perPage
-  return filteredUsers.value.slice(start, start + perPage)
-})
-
-function goToPage(p:number){
-  currentPage.value = p
-}
-
-/* Resetea página cuando cambian los filtros */
-watch([nameFilter,emailFilter,statusFilter],()=>{
-  currentPage.value = 1
-})
-
-/* Sin pag invalidas */
-watch(totalPages,(tp)=>{
-  if(currentPage.value > tp){
-    currentPage.value = 1
-  }
-})
-
-/* ROUTER SYNC  */
-
-/* lee desde URL */
-watch(
-  () => route.query,
-  q => {
-    nameFilter.value = (q.name as string) || ''
-    emailFilter.value = (q.email as string) || ''
-    statusFilter.value = (q.status as any) || 'all'
-    currentPage.value = Number(q.page) || 1
-  },
-  { immediate:true }
-)
-
-/* escribe URL */
-watch(
-  [nameFilter,emailFilter,statusFilter,currentPage],
-  ()=>{
-    router.replace({
-      query:{
-        name: nameFilter.value || undefined,
-        email: emailFilter.value || undefined,
-        status: statusFilter.value !== 'all' ? statusFilter.value : undefined,
-        page: currentPage.value !== 1 ? String(currentPage.value) : undefined
-      }
-    })
-  }
-)
-
-/* NAVIGATION */
-
-function goToDetail(id:number){
+function goToDetail(id: number) {
   router.push({
-    path:`/usuarios/${id}`,
+    path: `/usuarios/${id}`,
     query: route.query
   })
 }
-
-/*  MOUNT  */
 
 onMounted(loadUsers)
 </script>
@@ -131,17 +42,52 @@ onMounted(loadUsers)
 
       <!-- FILTERS -->
       <div class="grid md:grid-cols-3 gap-4">
-        <input v-model="nameFilter" placeholder="Filtrar por nombre" class="input-field"/>
-        <input v-model="emailFilter" placeholder="Filtrar por email" class="input-field"/>
-        <select v-model="statusFilter" class="input-field">
-          <option value="all">Todos</option>
-          <option value="activo">Activos</option>
-          <option value="inactivo">Inactivos</option>
-        </select>
-      </div>
+        <!-- Nombre -->
+        <div class="relative">
+          <input
+            v-model="nameFilter"
+            placeholder="Filtrar por nombre"
+            class="input-field pr-8"
+          />
+          <button
+            v-if="nameFilter"
+            @click="nameFilter = ''"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            type="button"
+          >
+            &#x2715;
+          </button>
+        </div>
+
+        <!-- Email -->
+        <div class="relative">
+          <input
+            v-model="emailFilter"
+            placeholder="Filtrar por email"
+            class="input-field pr-8"
+          />
+          <button
+            v-if="emailFilter"
+            @click="emailFilter = ''"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            type="button"
+          >
+            &#x2715;
+          </button>
+        </div>
+
+      <!-- Estado -->
+        <div class="relative">
+          <select v-model="statusFilter" class="input-field">
+            <option value="all">Todos</option>
+            <option value="activo">Activos</option>
+            <option value="inactivo">Inactivos</option>
+          </select>
+        </div>
+    </div>
 
       <!-- TABLE -->
-      <div v-if="loading" class="text-center py-6">Loading...</div>
+    <div v-if="loading" class="text-center py-6">Loading...</div>
 
       <div class="flex-1 overflow-y-auto">
         <table class="w-full border-collapse">
