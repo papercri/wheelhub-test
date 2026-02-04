@@ -7,6 +7,10 @@
     -webkit-text-size-adjust: 100%;
     -moz-tab-size: 4;
     tab-size: 4;
+     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
   }
 
   body {
@@ -47,7 +51,9 @@
   }
 }
 
+
 @layer components {
+ 
   .btn-primary {
     @apply bg-green-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition-colors;
   }
@@ -58,5 +64,11 @@
   
   .input-field {
     @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent;
+  }
+  .alt-bg-colors tr{
+    @apply bg-white rounded-lg 
+  }
+  .alt-bg-colors tr:nth-child(even){
+    @apply  bg-gray-100 rounded-lg 
   }
 }

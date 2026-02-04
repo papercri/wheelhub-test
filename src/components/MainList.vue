@@ -56,7 +56,7 @@ const filteredUsers = computed(() => {
         <h1 class="text-2xl font-bold">Usuarios <span class="text-gray-600 text-xs font-light">({{ filteredUsers.length }})</span></h1>
           <router-link
             to="/usuarios/nuevo"
-            class="bg-black text-white px-4 py-2 rounded hover:opacity-80"
+            class="btn-primary"
           >
             Añadir usuario
           </router-link>
@@ -66,18 +66,18 @@ const filteredUsers = computed(() => {
         <input
           v-model="nameFilter"
           placeholder="Filter by name"
-          class="border rounded px-3 py-2 w-full"
+          class="input-field"
         />
 
         <input
           v-model="emailFilter"
           placeholder="Filter by email"
-          class="border rounded px-3 py-2 w-full"
+          class="input-field"
         />
 
         <select
           v-model="statusFilter"
-          class="border rounded px-3 py-2 w-full"
+          class="input-field"
         >
           <option value="all">Todos</option>
           <option value="activo">Activos</option>
@@ -102,20 +102,18 @@ const filteredUsers = computed(() => {
           </tr>
         </thead>
 
-        <tbody>
+        <tbody class="alt-bg-colors">
           <tr
             v-for="u in filteredUsers"
             :key="u.id"
-            class="border-b hover:bg-gray-50"
           >
             <td class="py-2 px-2">{{ u.id }}</td>
             <td class="py-2 px-2">{{ u.name }}</td>
             <td class="py-2 px-2">{{ u.email }}</td>
             <td
-              class="py-2 px-2 text-center rounded"
               :class="{
-                'text-green-600 bg-green-100': u.status === 'activo',
-                'text-red-600 bg-red-100': u.status === 'inactivo'
+                'text-green-500 ': u.status === 'activo',
+                'text-red-500 ': u.status === 'inactivo'
               }"
             >
               {{ u.status }}
@@ -123,14 +121,14 @@ const filteredUsers = computed(() => {
             <td class="flex gap-3 justify-end py-2 px-2">
               <button
                 @click="openDetail(u)"
-                class="text-sm underline text-green-900"
+                class="text-sm underline text-green-500 hover:text-green-600"
               >
                 <font-awesome-icon icon="eye" />
               </button>
 
               <button
                 @click="deleteUser(u.id)"
-                class="text-red-500 font-bold"
+                class="text-red-500 hover:text-red-600 font-bold"
               >
                 <font-awesome-icon icon="xmark" />
               </button>
@@ -155,7 +153,7 @@ const filteredUsers = computed(() => {
 
     <button
       @click="closeModal"
-      class="mt-4 bg-black text-white px-4 py-2 rounded w-full"
+      class="btn-primary"
     >
       Cerrar
     </button>

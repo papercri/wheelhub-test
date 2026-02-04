@@ -29,17 +29,17 @@ const submit = async () => {
   <div class="p-8 max-w-md mx-auto space-y-4">
     <h1 class="text-2xl font-bold">Añadir usuario</h1>
 
-    <input v-model="name" placeholder="Name" class="border p-2 rounded w-full" />
-    <input v-model="email" placeholder="Email" class="border p-2 rounded w-full" />
+    <input v-model="name" placeholder="Nombre" class="input-field" />
+    <input v-model="email" placeholder="Email" class="input-field" />
 
-    <select v-model="status" class="border p-2 rounded w-full">
+    <select v-model="status" class="input-field">
       <option value="activo">Activo</option>
       <option value="inactivo">Inactivo</option>
     </select>
 
     <button
       @click="submit"
-      class="bg-black text-white px-4 py-2 rounded w-full"
+      class="btn-primary"
     >
       Guardar
     </button>
