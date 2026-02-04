@@ -8,7 +8,7 @@ import MainList from '../components/MainList.vue'
   <div class="flex h-screen bg-gray-50">
     <AppSidebar />
     <div class="flex flex-col flex-1">
-      <AppHeader />
+      <AppHeader :page="page" />
       <main class="flex-1 overflow-auto">
         <MainList />
       </main>

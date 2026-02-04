@@ -11,40 +11,9 @@
     <!-- Navigation Menu -->
     <nav class="flex-1 px-4">
       <ul class="space-y-1">
-        <li>
-          <SidebarItem 
-            label="Inicio" 
-            :active="false"
-          />
-        </li>
-        
-        <li>
-          <SidebarItem 
-            label="Tema" 
-            :active="false"
-          />
-        </li>
-        
-        <li>
-          <SidebarItem 
-            label="Páginas" 
-            :active="false"
-          />
-        </li>
-        
-        <li>
-          <SidebarItem 
-            label="Componentes" 
-            :active="false"
-          />
-        </li>
-        
-        <li>
-          <SidebarItem 
-            label="Usuarios" 
-            :active="true"
-          />
-        </li>
+        <li><SidebarItem label="Home" to="/" /></li>
+        <li><SidebarItem label="Usuarios" to="/usuarios" /></li>
+        <li><SidebarItem label="Añadir Usuario" to="/usuarios/nuevo" /></li>
       </ul>
     </nav>
   </aside>

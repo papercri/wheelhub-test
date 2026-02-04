@@ -1,27 +1,33 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-  interface Props {
-    label: string
-    active?: boolean
-  }
-  const props = withDefaults(defineProps<Props>(), {
-    active: false
-  })
+interface Props {
+  label: string
+  to: string
+}
 
+const props = defineProps<Props>()
+const route = useRoute()
+const router = useRouter()
+
+const isActive = computed(() => route.path === props.to)
+
+const navigate = () => {
+  router.push(props.to)
+}
 </script>
+
 <template>
-  <a
-    href="#"
-    class="flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-colors"
+  <div
+    @click="navigate"
+    class="flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-colors cursor-pointer"
     :class="[
-      active 
-        ? 'bg-green-100 text-green-700' 
+      isActive
+        ? 'bg-green-100 text-green-700'
         : 'text-gray-700 hover:bg-gray-100'
     ]"
   >
-    <div class="flex items-center gap-3">
-      <span class="font-medium">{{ label }}</span>
-    </div>
-
-  </a>
+    <span class="font-medium">{{ label }}</span>
+  </div>
 </template>
