@@ -11,7 +11,18 @@ const props = defineProps<Props>()
 const route = useRoute()
 const router = useRouter()
 
-const isActive = computed(() => route.path === props.to)
+
+const isActive = computed(() => {
+  if (route.path === props.to) return true
+  
+  // Solo aplica la lógica especial si este es el botón de usuarios
+  if (props.to === '/usuarios') {
+    const usuarioMatch = route.path.match(/^\/usuarios\/\d+$/)
+    return usuarioMatch !== null
+  }
+  
+  return false
+})
 
 const navigate = () => {
   router.push(props.to)
