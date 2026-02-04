@@ -68,7 +68,7 @@ wheelhub-test/
 ├── src/
 │   ├── api/
 │   │   ├── Dockerfile
-│   │   └── users.json
+│   │   └── db.json
 │   ├── components/
 │   │   ├── layout/
 │   │   │   └── AppHeader.vue

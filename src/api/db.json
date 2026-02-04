@@ -6,7 +6,6 @@
     { "id": 4, "name": "Carlos Diaz", "email": "carlos@mail.com", "status": "inactivo" },
     { "id": 5, "name": "Lucia Torres", "email": "lucia@mail.com", "status": "activo" },
     { "id": 6, "name": "Pedro Ruiz", "email": "pedro@mail.com", "status": "inactivo" },
-
     { "id": 7, "name": "Laura Moreno", "email": "laura@mail.com", "status": "activo" },
     { "id": 8, "name": "Miguel Santos", "email": "miguel@mail.com", "status": "inactivo" },
     { "id": 9, "name": "Elena Romero", "email": "elena@mail.com", "status": "activo" },

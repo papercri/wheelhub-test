@@ -27,7 +27,7 @@ const submit = async () => {
 
 <template>
   <div class="p-8 max-w-md mx-auto space-y-4">
-    <h1 class="text-2xl font-bold">Nuevo usuario</h1>
+    <h1 class="text-2xl font-bold">Añadir usuario</h1>
 
     <input v-model="name" placeholder="Name" class="border p-2 rounded w-full" />
     <input v-model="email" placeholder="Email" class="border p-2 rounded w-full" />

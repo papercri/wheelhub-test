@@ -90,41 +90,56 @@ const filteredUsers = computed(() => {
         Loading...
       </div>
 
-      <table class="w-full">
-        <tr
-          v-for="u in filteredUsers"
-          :key="u.id"
-          class="border-b hover:bg-gray-50"
-        >
-          <td class="py-2">{{ u.id }}</td>
-          <td>{{ u.name }}</td>
-          <td>{{ u.email }}</td>
-          <td>{{ u.status }}</td>
+      <table class="w-full border-collapse">
 
-          <td class="flex gap-3 justify-end py-2">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-2 px-2 text-left font-bold">ID</th>
+            <th class="py-2 px-2 text-left font-bold">Nombre</th>
+            <th class="py-2 px-2 text-left font-bold">Email</th>
+            <th class="py-2 px-2 text-left font-bold">Estado</th>
+            <th class="py-2 px-2 text-right font-bold">Acciones</th>
+          </tr>
+        </thead>
 
-            <button
-              @click="openDetail(u)"
-              class="text-sm underline"
+        <tbody>
+          <tr
+            v-for="u in filteredUsers"
+            :key="u.id"
+            class="border-b hover:bg-gray-50"
+          >
+            <td class="py-2 px-2">{{ u.id }}</td>
+            <td class="py-2 px-2">{{ u.name }}</td>
+            <td class="py-2 px-2">{{ u.email }}</td>
+            <td
+              class="py-2 px-2 text-center rounded"
+              :class="{
+                'text-green-600 bg-green-100': u.status === 'activo',
+                'text-red-600 bg-red-100': u.status === 'inactivo'
+              }"
             >
-              <font-awesome-icon icon="eye" />
-            </button>
+              {{ u.status }}
+            </td>
+            <td class="flex gap-3 justify-end py-2 px-2">
+              <button
+                @click="openDetail(u)"
+                class="text-sm underline text-green-900"
+              >
+                <font-awesome-icon icon="eye" />
+              </button>
 
-            <button
-              @click="deleteUser(u.id)"
-              class="text-red-500 font-bold"
-            >
-              <font-awesome-icon icon="xmark" />
-            </button>
-
-          </td>
-        </tr>
+              <button
+                @click="deleteUser(u.id)"
+                class="text-red-500 font-bold"
+              >
+                <font-awesome-icon icon="xmark" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
-
-
     </div>
   </div>
-
 
   <div
   v-if="showModal && selectedUser"
