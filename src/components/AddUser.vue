@@ -81,7 +81,10 @@ const submit = async () => {
       </select>
     </div>
 
-    <button @click="submit" class="btn-primary">Guardar</button>
+    <div class="flex gap-4">
+      <button @click="submit" class="btn-primary">Guardar</button>
+      <button @click="router.push('/')" class="btn-secondary">Cancelar</button>
+    </div>
 
     <p v-if="errors.server" class="text-red-500 text-sm mt-2">{{ errors.server }}</p>
   </div>
